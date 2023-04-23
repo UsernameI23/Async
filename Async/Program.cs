@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -14,7 +14,7 @@ namespace Assignment10Ex4
 
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             try
             {
@@ -25,13 +25,13 @@ namespace Assignment10Ex4
                 BrushTeeth();
                 Console.WriteLine("Teeth are clean");
 
-                Shower shower = TakeAShower();
+                Shower shower = await TakeAShowerAsync();
                 Console.WriteLine("Showering is done");
 
                 GetDressed();
                 Console.WriteLine("Dressed and ready to go");
 
-                Drive drive = DriveToWork(10);
+                Drive drive = await DriveToWorkAsync(10);
                 Console.WriteLine("Walking into work.");
 
                 Console.WriteLine("Ready to begin");
@@ -58,7 +58,7 @@ namespace Assignment10Ex4
         private static void BrushTeeth() => Console.WriteLine("Putting paste on the brush... Brushing");
 
 
-        private static Shower TakeAShower()
+        private static async Task<Shower> TakeAShowerAsync()
         {
             Console.WriteLine("Warming the water...");
             Task.Delay(1000);
@@ -71,7 +71,7 @@ namespace Assignment10Ex4
 
         private static void GetDressed() => Console.WriteLine("Together and ready to go");
 
-        private static Drive DriveToWork(int time)
+        private static async Task <Drive > DriveToWorkAsync(int time)
         {
             Console.WriteLine("Starting the car...");
             for (int i = 0; i < time; i++)
@@ -84,32 +84,4 @@ namespace Assignment10Ex4
         }
     }
 }
-2.There are 3 methods you need to convert: DriveToWork, TakeAShower and Main.
 
-a) Add await before all occurrences of Task.Delay() in the 3 methods.
-
-b) Add async to the method signatures
-
-If the signature is returning a class object, then you will need to include the Class as the data type for the Task
-
-Example:
-
-convert
-
-private static Shower TakeAShower()
-
-to
-
-private static async Task<Shower> TakeAShowerAsync()
-
-c) Add await before the method call in Main
-
-Example:
-
-convert
-
-Shower shower = TakeAShower();
-
-to
-
-Shower shower = await TakeAShowerAsync();
